@@ -25,9 +25,25 @@ public abstract class Collection {
         }
     }
 
+    public static Game getGameById(long id) throws NotFoundException {
+
+        // https://www.baeldung.com/java-optional-throw-exception#bd-throw-exception-when-value-is-missing
+        
+        Optional<Game> foundGame = myCollection.stream().filter(game -> game.getId() == id).findFirst();
+        if (foundGame.isPresent()) {
+            return foundGame.get();
+        }
+        throw new NotFoundException(id);
+    }
+
     public static void searchById(long id) {
         try {
-            System.out.println(myCollection.stream().filter(game -> game.id == id).findAny().orElseThrow(() -> new NotFoundException(id)));
+            if (myCollection.contains(getGameById(id))) {
+
+                System.out.println(getGameById(id));
+            } else {
+                throw new NotFoundException(id);
+            }
         } catch (NotFoundException e) {
             System.out.println(e.getMessage());
         }
@@ -48,11 +64,11 @@ public abstract class Collection {
     }
 
     public static void deleteById(long id) {
-        Optional<Game> gameToDelete = myCollection.stream().filter(game -> game.getId() == id).findFirst();
+        // Optional<Game> gameToDelete = myCollection.stream().filter(game -> game.getId() == id).findFirst();
 
         try {
-            if (gameToDelete.isPresent()) {
-                myCollection.remove(gameToDelete.get());
+            if (myCollection.contains(getGameById(id))) {
+                myCollection.remove(getGameById(id));
                 System.out.println("Game removed successfully.");
             } else {
                 throw new NotFoundException(id);

@@ -32,7 +32,7 @@ public class Application {
 
         //Collection.searchByPrice(100);
 
-        Collection.searchByNumOfPlayers(4);
+        // Collection.searchByNumOfPlayers(4);
 
         System.out.println(Collection.myCollection);
         Collection.deleteById(125762);
