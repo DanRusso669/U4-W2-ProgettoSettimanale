@@ -49,7 +49,12 @@ public abstract class Collection {
 
     public static void searchByPrice(double price) {
         List<Game> searchedGames = myCollection.stream().filter(game -> game.getPrice() < price).sorted(Comparator.comparing(Game::getPrice)).toList().reversed();
-        searchedGames.forEach(game -> System.out.println(game));
+
+        if (searchedGames.isEmpty()) {
+            System.out.println("There is no game in your collection with a price lower than " + price);
+        } else {
+            searchedGames.forEach(game -> System.out.println(game));
+        }
     }
 
     public static void searchByNumOfPlayers(int numOfPlayers) {
@@ -82,24 +87,47 @@ public abstract class Collection {
             Game selectedGame = getGameById(id);
             if (myCollection.contains(selectedGame)) {
                 System.out.println("Game found. Leaves blank space to keep the current value.");
+
                 System.out.println("Old title: " + selectedGame.getTitle() + ", New title: ");
-                selectedGame.setTitle(scan.nextLine());
+                if (!scan.nextLine().isEmpty()) {
+                    selectedGame.setTitle(scan.nextLine());
+                }
+
                 System.out.println("Old year: " + selectedGame.getYear() + ", New year: ");
-                selectedGame.setYear(Integer.parseInt(scan.nextLine()));
+                if (!scan.nextLine().isEmpty()) {
+                    selectedGame.setYear(Integer.parseInt(scan.nextLine()));
+                }
+
                 System.out.println("Old price: " + selectedGame.getPrice() + ", New price: ");
-                selectedGame.setPrice(Double.parseDouble(scan.nextLine()));
+                if (!scan.nextLine().isEmpty()) {
+                    selectedGame.setPrice(Double.parseDouble(scan.nextLine()));
+                }
+
                 if (selectedGame instanceof Boardgame) {
                     System.out.println("Old number of players: " + ((Boardgame) selectedGame).getNumOfPlayers() + ", New number of players: ");
-                    ((Boardgame) selectedGame).setNumOfPlayers(Integer.parseInt(scan.nextLine()));
+                    if (!scan.nextLine().isEmpty()) {
+                        ((Boardgame) selectedGame).setNumOfPlayers(Integer.parseInt(scan.nextLine()));
+                    }
+
                     System.out.println("Old playing time: " + ((Boardgame) selectedGame).getPlayingTime() + ", New playing time: ");
-                    ((Boardgame) selectedGame).setPlayingTime(Integer.parseInt(scan.nextLine()));
+                    if (!scan.nextLine().isEmpty()) {
+                        ((Boardgame) selectedGame).setPlayingTime(Integer.parseInt(scan.nextLine()));
+                    }
+
                 } else if (selectedGame instanceof Videogame) {
                     System.out.println("Old genre: " + ((Videogame) selectedGame).getGenre() + ", New genre (COOP, SINGLEPLAYER, FPS): ");
-                    ((Videogame) selectedGame).setGenre(Genre.valueOf(scan.nextLine()));
+                    if (!scan.nextLine().isEmpty()) ((Videogame) selectedGame).setGenre(Genre.valueOf(scan.nextLine()));
+                    else ((Videogame) selectedGame).getGenre();
+
                     System.out.println("Old platform: " + ((Videogame) selectedGame).getPlatform() + ", New platform: ");
-                    ((Videogame) selectedGame).setPlatform(scan.nextLine());
+                    if (!scan.nextLine().isEmpty()) {
+                        ((Videogame) selectedGame).setPlatform(scan.nextLine());
+                    }
+
                     System.out.println("Old hours in game: " + ((Videogame) selectedGame).getHoursInGame() + ", New hours in game: ");
-                    ((Videogame) selectedGame).setHoursInGame(Double.parseDouble(scan.nextLine()));
+                    if (!scan.nextLine().isEmpty()) {
+                        ((Videogame) selectedGame).setHoursInGame(Double.parseDouble(scan.nextLine()));
+                    }
                 }
             }
 

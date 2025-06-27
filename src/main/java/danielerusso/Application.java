@@ -28,19 +28,19 @@ public class Application {
         Collection.addGame(azul);
         Collection.addGame(duel);
 
-        // Collection.searchById(230802);
+        //Collection.searchById(2);
 
-        //Collection.searchByPrice(100);
+        //Collection.searchByPrice(10);
 
-        // Collection.searchByNumOfPlayers(4);
+        // Collection.searchByNumOfPlayers(2);
 
-        System.out.println(Collection.myCollection);
+        // System.out.println(Collection.myCollection);
         // Collection.deleteById(125762);
         //  System.out.println(Collection.myCollection);
 
-        // Collection.updateGameById(125762);
+        Collection.updateGameById(125762);
 
-        Collection.getStats();
+//        Collection.getStats();
 
 
     }
