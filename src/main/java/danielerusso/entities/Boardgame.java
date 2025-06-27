@@ -10,4 +10,24 @@ public class Boardgame extends Game {
         this.numOfPlayers = numOfPlayers;
         this.playingTime = playingTime;
     }
+
+    public int getNumOfPlayers() {
+        return numOfPlayers;
+    }
+
+    public int getPlayingTime() {
+        return playingTime;
+    }
+
+    @Override
+    public String toString() {
+        return "Boardgame{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", year=" + year +
+                ", price=" + price +
+                ", numOfPlayers=" + numOfPlayers +
+                ", playingTime=" + playingTime +
+                '}';
+    }
 }

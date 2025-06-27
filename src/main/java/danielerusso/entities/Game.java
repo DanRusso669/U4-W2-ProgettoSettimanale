@@ -1,5 +1,7 @@
 package danielerusso.entities;
 
+import java.util.Objects;
+
 public abstract class Game {
 
     protected long id;
@@ -12,5 +14,43 @@ public abstract class Game {
         this.title = title;
         this.year = year;
         this.price = price;
+    }
+
+    @Override
+    public String toString() {
+        return "Game{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", year=" + year +
+                ", price=" + price +
+                '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (o == null || getClass() != o.getClass()) return false;
+        Game game = (Game) o;
+        return id == game.id && year == game.year && Double.compare(price, game.price) == 0 && Objects.equals(title, game.title);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, title, year, price);
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public String getTitle() {
+        return title;
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    public double getPrice() {
+        return price;
     }
 }
