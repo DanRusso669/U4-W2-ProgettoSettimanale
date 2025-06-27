@@ -12,12 +12,14 @@ public abstract class Collection {
     // METHODS
     public static void addGame(Game game) {
         try {
-            if (myCollection.contains(game)) {
-                throw new AlreadyInCollection();
-            } else {
-                myCollection.add(game);
-                System.out.println("Game successfully added to your collection.");
+            for (Game gameInCollection : myCollection) {
+                if (gameInCollection.getId() == game.getId()) {
+                    throw new AlreadyInCollection();
+                }
             }
+            myCollection.add(game);
+            System.out.println("Game successfully added to your collection.");
+
         } catch (AlreadyInCollection e) {
             System.out.println(e.getMessage());
         }
