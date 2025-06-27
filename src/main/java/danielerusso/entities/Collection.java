@@ -89,45 +89,43 @@ public abstract class Collection {
                 System.out.println("Game found. Leaves blank space to keep the current value.");
 
                 System.out.println("Old title: " + selectedGame.getTitle() + ", New title: ");
-                if (!scan.nextLine().isEmpty()) {
-                    selectedGame.setTitle(scan.nextLine());
-                }
+                String input = scan.nextLine();
+                if (!input.isEmpty()) selectedGame.setTitle(input);
 
                 System.out.println("Old year: " + selectedGame.getYear() + ", New year: ");
-                if (!scan.nextLine().isEmpty()) {
-                    selectedGame.setYear(Integer.parseInt(scan.nextLine()));
-                }
+                input = scan.nextLine();
+                if (!input.isEmpty()) selectedGame.setYear(Integer.parseInt(input));
 
                 System.out.println("Old price: " + selectedGame.getPrice() + ", New price: ");
-                if (!scan.nextLine().isEmpty()) {
-                    selectedGame.setPrice(Double.parseDouble(scan.nextLine()));
-                }
+                input = scan.nextLine();
+                if (!input.isEmpty()) selectedGame.setPrice(Double.parseDouble(input));
 
                 if (selectedGame instanceof Boardgame) {
                     System.out.println("Old number of players: " + ((Boardgame) selectedGame).getNumOfPlayers() + ", New number of players: ");
-                    if (!scan.nextLine().isEmpty()) {
-                        ((Boardgame) selectedGame).setNumOfPlayers(Integer.parseInt(scan.nextLine()));
-                    }
+                    input = scan.nextLine();
+                    if (!input.isEmpty()) ((Boardgame) selectedGame).setNumOfPlayers(Integer.parseInt(input));
+
 
                     System.out.println("Old playing time: " + ((Boardgame) selectedGame).getPlayingTime() + ", New playing time: ");
-                    if (!scan.nextLine().isEmpty()) {
-                        ((Boardgame) selectedGame).setPlayingTime(Integer.parseInt(scan.nextLine()));
-                    }
+                    input = scan.nextLine();
+                    if (!input.isEmpty()) ((Boardgame) selectedGame).setPlayingTime(Integer.parseInt(input));
+
 
                 } else if (selectedGame instanceof Videogame) {
-                    System.out.println("Old genre: " + ((Videogame) selectedGame).getGenre() + ", New genre (COOP, SINGLEPLAYER, FPS): ");
-                    if (!scan.nextLine().isEmpty()) ((Videogame) selectedGame).setGenre(Genre.valueOf(scan.nextLine()));
-                    else ((Videogame) selectedGame).getGenre();
 
                     System.out.println("Old platform: " + ((Videogame) selectedGame).getPlatform() + ", New platform: ");
-                    if (!scan.nextLine().isEmpty()) {
-                        ((Videogame) selectedGame).setPlatform(scan.nextLine());
-                    }
+                    input = scan.nextLine();
+                    if (!input.isEmpty()) ((Videogame) selectedGame).setPlatform(input);
+
 
                     System.out.println("Old hours in game: " + ((Videogame) selectedGame).getHoursInGame() + ", New hours in game: ");
-                    if (!scan.nextLine().isEmpty()) {
-                        ((Videogame) selectedGame).setHoursInGame(Double.parseDouble(scan.nextLine()));
-                    }
+                    input = scan.nextLine();
+                    if (!input.isEmpty()) ((Videogame) selectedGame).setHoursInGame(Double.parseDouble(input));
+
+                    System.out.println("Old genre: " + ((Videogame) selectedGame).getGenre() + ", New genre (COOP, SINGLEPLAYER, FPS): ");
+                    input = scan.nextLine();
+                    if (!input.isEmpty()) ((Videogame) selectedGame).setGenre(Genre.valueOf(input.toUpperCase()));
+
                 }
             }
 
@@ -135,6 +133,8 @@ public abstract class Collection {
             System.out.println(selectedGame);
         } catch (NotFoundException e) {
             System.out.println(e.getMessage());
+        } catch (IllegalArgumentException e) {
+            System.out.println("Enter a valid value.");
         }
     }
 

@@ -38,9 +38,9 @@ public class Application {
         // Collection.deleteById(125762);
         //  System.out.println(Collection.myCollection);
 
-        Collection.updateGameById(125762);
+        // Collection.updateGameById(125762);
 
-//        Collection.getStats();
+        //  Collection.getStats();
 
 
     }
