@@ -15,6 +15,30 @@ public class Videogame extends Game {
         this.genre = genre;
     }
 
+    public String getPlatform() {
+        return platform;
+    }
+
+    public void setPlatform(String platform) {
+        this.platform = platform;
+    }
+
+    public double getHoursInGame() {
+        return hoursInGame;
+    }
+
+    public void setHoursInGame(double hoursInGame) {
+        this.hoursInGame = hoursInGame;
+    }
+
+    public Genre getGenre() {
+        return genre;
+    }
+
+    public void setGenre(Genre genre) {
+        this.genre = genre;
+    }
+
     @Override
     public String toString() {
         return "Videogame{" +

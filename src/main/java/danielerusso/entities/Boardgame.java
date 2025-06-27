@@ -15,8 +15,16 @@ public class Boardgame extends Game {
         return numOfPlayers;
     }
 
+    public void setNumOfPlayers(int numOfPlayers) {
+        this.numOfPlayers = numOfPlayers;
+    }
+
     public int getPlayingTime() {
         return playingTime;
+    }
+
+    public void setPlayingTime(int playingTime) {
+        this.playingTime = playingTime;
     }
 
     @Override

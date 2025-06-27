@@ -35,8 +35,12 @@ public class Application {
         // Collection.searchByNumOfPlayers(4);
 
         System.out.println(Collection.myCollection);
-        Collection.deleteById(125762);
-        System.out.println(Collection.myCollection);
+        // Collection.deleteById(125762);
+        //  System.out.println(Collection.myCollection);
+
+        // Collection.updateGameById(125762);
+
+        Collection.getStats();
 
 
     }
