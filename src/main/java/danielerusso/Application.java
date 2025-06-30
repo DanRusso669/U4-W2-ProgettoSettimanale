@@ -27,23 +27,12 @@ public class Application {
         Videogame cod = new Videogame(987651, "Call of Duty: Black Ops 6", 2024, 99.99, "Xbox One", 247, Genre.FPS);
         Videogame itt = new Videogame(987651, "It Takes Two", 2021, 59.99, "PC", 15.5, Genre.COOP);
 
-        Collection.addGame(tlou);
-        Collection.addGame(azul);
-        Collection.addGame(duel);
+        Collection myCollection = new Collection();
 
-        //Collection.searchById(2);
+        myCollection.addGame(tlou);
+        myCollection.addGame(azul);
+        myCollection.addGame(duel);
 
-        //Collection.searchByPrice(10);
-
-        // Collection.searchByNumOfPlayers(2);
-
-        // System.out.println(Collection.myCollection);
-        // Collection.deleteById(125762);
-        //  System.out.println(Collection.myCollection);
-
-        // Collection.updateGameById(125762);
-
-        //  Collection.getStats();
 
         boolean isDone = false;
 
@@ -97,8 +86,8 @@ public class Application {
                             }
 
 
-                            Collection.addGame(newGame);
-                            Collection.searchById(gameId);
+                            myCollection.addGame(newGame);
+                            myCollection.searchById(gameId);
 
 
                         }
@@ -106,39 +95,39 @@ public class Application {
                         case 2: {
                             System.out.println("Enter the id of the game you want search for: ");
                             long id = Long.parseLong(scan.nextLine());
-                            Collection.searchById(id);
+                            myCollection.searchById(id);
                         }
                         break;
                         case 3: {
                             System.out.println("Enter a price: ");
                             double price = Double.parseDouble(scan.nextLine());
-                            Collection.searchByPrice(price);
+                            myCollection.searchByPrice(price);
                         }
                         break;
                         case 4: {
                             System.out.println("Enter a number of players: ");
                             int num = Integer.parseInt(scan.nextLine());
-                            Collection.searchByNumOfPlayers(num);
+                            myCollection.searchByNumOfPlayers(num);
                         }
                         break;
                         case 5: {
                             System.out.println("Enter the id of the game you want to delete: ");
                             long id = Long.parseLong(scan.nextLine());
-                            Collection.deleteById(id);
+                            myCollection.deleteById(id);
                         }
                         break;
                         case 6: {
                             System.out.println("Enter the id of the game you want to update: ");
                             long id = Long.parseLong(scan.nextLine());
-                            Collection.updateGameById(id);
+                            myCollection.updateGameById(id);
                         }
                         break;
                         case 7: {
-                            Collection.getStats();
+                            myCollection.getStats();
                         }
                         break;
                         case 8: {
-                            Collection.myCollection.forEach(System.out::println);
+                            myCollection.getCollection();
                         }
                         break;
                         case 0:

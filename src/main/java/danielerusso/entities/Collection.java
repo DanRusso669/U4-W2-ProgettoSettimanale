@@ -6,39 +6,27 @@ import danielerusso.exceptions.NotFoundException;
 
 import java.util.*;
 
-public abstract class Collection {
-    public static List<Game> myCollection = new ArrayList<>();
+public class Collection {
+    private List<Game> myCollection;
 
-    // METHODS
-    public static void addGame(Game game) {
-        try {
-            for (Game gameInCollection : myCollection) {
-                if (gameInCollection.getId() == game.getId()) {
-                    throw new AlreadyInCollection();
-                }
-            }
-            myCollection.add(game);
-            System.out.println("Game successfully added to your collection.");
-
-        } catch (AlreadyInCollection e) {
-            System.out.println(e.getMessage());
-        }
+    public Collection() {
+        this.myCollection = new ArrayList<>();
     }
 
-    public static Game getGameById(long id) throws NotFoundException {
+    public Game getGameById(long id) throws NotFoundException {
 
         // https://www.baeldung.com/java-optional-throw-exception#bd-throw-exception-when-value-is-missing
 
-        Optional<Game> foundGame = myCollection.stream().filter(game -> game.getId() == id).findFirst();
+        Optional<Game> foundGame = this.myCollection.stream().filter(game -> game.getId() == id).findFirst();
         if (foundGame.isPresent()) {
             return foundGame.get();
         }
         throw new NotFoundException(id);
     }
 
-    public static void searchById(long id) {
+    public void searchById(long id) {
         try {
-            if (myCollection.contains(getGameById(id))) {
+            if (this.myCollection.contains(getGameById(id))) {
 
                 System.out.println(getGameById(id));
             } else {
@@ -49,8 +37,8 @@ public abstract class Collection {
         }
     }
 
-    public static void searchByPrice(double price) {
-        List<Game> searchedGames = myCollection.stream().filter(game -> game.getPrice() < price).sorted(Comparator.comparing(Game::getPrice)).toList().reversed();
+    public void searchByPrice(double price) {
+        List<Game> searchedGames = this.myCollection.stream().filter(game -> game.getPrice() < price).sorted(Comparator.comparing(Game::getPrice)).toList().reversed();
 
         if (searchedGames.isEmpty()) {
             System.out.println("There is no game in your collection with a price lower than " + price);
@@ -59,8 +47,8 @@ public abstract class Collection {
         }
     }
 
-    public static void searchByNumOfPlayers(int numOfPlayers) {
-        List<Game> searchedGames = myCollection.stream().filter(game -> game instanceof Boardgame).filter(game -> ((Boardgame) game).getNumOfPlayers() == numOfPlayers).toList();
+    public void searchByNumOfPlayers(int numOfPlayers) {
+        List<Game> searchedGames = this.myCollection.stream().filter(game -> game instanceof Boardgame).filter(game -> ((Boardgame) game).getNumOfPlayers() == numOfPlayers).toList();
         if (searchedGames.isEmpty()) {
             System.out.println("No game found with this number of players: " + numOfPlayers);
         } else {
@@ -68,12 +56,16 @@ public abstract class Collection {
         }
     }
 
-    public static void deleteById(long id) {
-        // Optional<Game> gameToDelete = myCollection.stream().filter(game -> game.getId() == id).findFirst();
+    public void getCollection() {
+        for (Game game : this.myCollection) {
+            System.out.println(game);
+        }
+    }
 
+    public void deleteById(long id) {
         try {
-            if (myCollection.contains(getGameById(id))) {
-                myCollection.remove(getGameById(id));
+            if (this.myCollection.contains(getGameById(id))) {
+                this.myCollection.remove(getGameById(id));
                 System.out.println("Game removed successfully.");
             } else {
                 throw new NotFoundException(id);
@@ -83,11 +75,11 @@ public abstract class Collection {
         }
     }
 
-    public static void updateGameById(long id) {
+    public void updateGameById(long id) {
         try {
             Scanner scan = new Scanner(System.in);
             Game selectedGame = getGameById(id);
-            if (myCollection.contains(selectedGame)) {
+            if (this.myCollection.contains(selectedGame)) {
                 System.out.println("Game found. Leaves blank space to keep the current value.");
 
                 System.out.println("Old title: " + selectedGame.getTitle() + ", New title: ");
@@ -140,17 +132,33 @@ public abstract class Collection {
         }
     }
 
-    public static void getStats() {
-        List<Game> boardgames = myCollection.stream().filter(game -> game instanceof Boardgame).toList();
-        List<Game> videogames = myCollection.stream().filter(game -> game instanceof Videogame).toList();
-        OptionalDouble averagePrice = myCollection.stream().mapToDouble(game -> game.getPrice()).average();
-        Game mostExpensiveGame = myCollection.stream().sorted(Comparator.comparing(Game::getPrice).reversed()).limit(1).toList().get(0);
+    public void getStats() {
+        List<Game> boardgames = this.myCollection.stream().filter(game -> game instanceof Boardgame).toList();
+        List<Game> videogames = this.myCollection.stream().filter(game -> game instanceof Videogame).toList();
+        OptionalDouble averagePrice = this.myCollection.stream().mapToDouble(game -> game.getPrice()).average();
+        Game mostExpensiveGame = this.myCollection.stream().sorted(Comparator.comparing(Game::getPrice).reversed()).limit(1).toList().get(0);
 
         if (averagePrice.isPresent()) {
             System.out.println("Your collection contains " + boardgames.size() + " boardgames and " + videogames.size() + " videogames, for a total of " + myCollection.size() + " games.");
             System.out.println("The most expensive game is " + mostExpensiveGame.getTitle() + " with a price of " + mostExpensiveGame.getPrice());
             System.out.println("The average price of your collection is: " + averagePrice.getAsDouble());
         } else System.out.println("Your collection is empty.");
+    }
+
+    // METHODS
+    public void addGame(Game game) {
+        try {
+            for (Game gameInCollection : this.myCollection) {
+                if (gameInCollection.getId() == game.getId()) {
+                    throw new AlreadyInCollection();
+                }
+            }
+            this.myCollection.add(game);
+            System.out.println("Game successfully added to your collection.");
+
+        } catch (AlreadyInCollection e) {
+            System.out.println(e.getMessage());
+        }
     }
 
 }
