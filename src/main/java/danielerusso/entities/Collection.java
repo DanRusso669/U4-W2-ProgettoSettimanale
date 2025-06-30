@@ -6,6 +6,11 @@ import danielerusso.exceptions.NotFoundException;
 
 import java.util.*;
 
+/*
+ Ho inizialmente creato la classe astratta pensando di non istanziarla nel main, così facendo però ho lasciato tutti i metodi statici e quindi accessibili dall'esterno della classe,
+ non seguendo il principio dell'incapsulamento.
+*/
+
 public class Collection {
     private List<Game> myCollection;
 
